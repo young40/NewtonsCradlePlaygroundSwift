@@ -24,11 +24,30 @@ public class NewtonsCradle: UIView {
         
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        
+        animator = UIDynamicAnimator(referenceView: self)
+        animator?.addBehavior(collisionBehavior)
+        animator?.addBehavior(gravityBehavior)
+        animator?.addBehavior(itemBehavior)
+
+        self.createBallViews()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func createBallViews() {
+        for color in self.colors {
+            let ball = UIView(frame: CGRect.zero)
+
+            ball.addObserver(self, forKeyPath: "center", options: NSKeyValueObservingOptions.init(rawValue: 0), context: nil)
+
+            ball.backgroundColor = color
+
+            addSubview(ball)
+
+            balls.append(ball)
+        }
     }
     
     public override func draw(_ rect: CGRect) {

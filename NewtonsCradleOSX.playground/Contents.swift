@@ -1,3 +1,7 @@
 import Cocoa
+import PlaygroundSupport
 
-var str = "Hello, playground"
+
+let view = NewtonsCradle()
+
+PlaygroundPage.current.liveView = view
